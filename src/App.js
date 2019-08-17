@@ -7,8 +7,7 @@ import Table from './components/Table';
 class App extends React.Component {
 
   state = {
-
-    autores: [
+    cursos: [
       {
         instrutor: 'Max',
         curso: 'Java',
@@ -37,12 +36,26 @@ class App extends React.Component {
     ]
   }
 
+  removeCurso = index => {
+
+    const {cursos} = this.state;
+
+    this.setState({
+      cursos: cursos.filter((curso, posAtual) => {
+        console.log(curso, posAtual, index)
+        return posAtual !== index;
+      })
+    });
+  }
+
+  /* ↑ "index" é a posição da tr clicada no array original, "curso" é cada item do array original do state, e "posAtual" é a posição de cada item no array original do state. O método filter retorna, no final, um novo array apenas com os elementos cuja posição inicial era diferente da posição do botão que foi clicado e, assim, o item some da tabela */
+
   render() {
     return (
       <>
         <Greeting />
         <Clock />
-        <Table autores={this.state.autores} />
+        <Table cursos={this.state.cursos} removeCurso={this.removeCurso} />
       </>
     );
   }

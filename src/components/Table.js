@@ -16,14 +16,14 @@ const TableHead = () => {
 
 const TableBody = props => {
 
-  const linhas = props.autores.map((linha, index) => {
+  const linhas = props.cursos.map((linha, index) => {
 
     return(
       <tr key={index}>
         <td>{linha.instrutor}</td>
         <td>{linha.curso}</td>
         <td>{linha.valor}</td>
-        <td><button>Remover</button></td>
+        <td><button onClick={() => {props.removeCurso(index)}}>Remover</button></td>
       </tr>
     );
   });
@@ -39,12 +39,12 @@ class Table extends React.Component {
 
   render() {
 
-    const {autores} = this.props;
+    const {cursos, removeCurso} = this.props;
 
     return (
       <table>
         <TableHead />
-        <TableBody autores={autores} />
+        <TableBody cursos={cursos} removeCurso={removeCurso} />
       </table>
     );
   }
