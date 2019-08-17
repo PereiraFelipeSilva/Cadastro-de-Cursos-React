@@ -3,6 +3,7 @@ import './styles/App.css';
 import Greeting from './components/Greeting';
 import Clock from './components/Clock';
 import Table from './components/Table';
+import Form from './components/Form';
 
 class App extends React.Component {
 
@@ -38,7 +39,7 @@ class App extends React.Component {
 
   removeCurso = index => {
 
-    const {cursos} = this.state;
+    const { cursos } = this.state;
 
     this.setState({
       cursos: cursos.filter((curso, posAtual) => {
@@ -56,6 +57,7 @@ class App extends React.Component {
         <Greeting />
         <Clock />
         <Table cursos={this.state.cursos} removeCurso={this.removeCurso} />
+        <Form />
       </>
     );
   }

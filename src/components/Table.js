@@ -18,17 +18,17 @@ const TableBody = props => {
 
   const linhas = props.cursos.map((linha, index) => {
 
-    return(
+    return (
       <tr key={index}>
         <td>{linha.instrutor}</td>
         <td>{linha.curso}</td>
         <td>{linha.valor}</td>
-        <td><button onClick={() => {props.removeCurso(index)}}>Remover</button></td>
+        <td><button onClick={() => { props.removeCurso(index) }}>Remover</button></td>
       </tr>
     );
   });
 
-  return(
+  return (
     <tbody>
       {linhas}
     </tbody>
@@ -39,7 +39,7 @@ class Table extends React.Component {
 
   render() {
 
-    const {cursos, removeCurso} = this.props;
+    const { cursos, removeCurso } = this.props;
 
     return (
       <table>
