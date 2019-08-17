@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/App.css';
+import 'materialize-css/dist/css/materialize.min.css';
 import Greeting from './components/Greeting';
 import Clock from './components/Clock';
 import Table from './components/Table';
@@ -44,7 +45,7 @@ class App extends React.Component {
     });
   }
 
-  /* ↑ O spread operator (...) pega todas as informações do state (cursos) atual e substitui pelas informações novas, passadas no segundo parâmetro */
+  /* ↑ O spread operator (...) pega todas as informações do state atual (cursos) e inclui o novo curso passado como segundo parâmetro. Esse segundo parâmetro é passado no submit do formulário com as informações dos inputs */
 
   removeCurso = index => {
 
