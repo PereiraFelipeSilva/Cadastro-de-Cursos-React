@@ -2,27 +2,29 @@ import React from 'react';
 
 class Clock extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {hours: new Date()};
+    this.state = {
+      hours: new Date()
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.timer = setInterval(() => {
       this.clock()
     }, 1000);
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     clearInterval(this.timer);
   }
-  clock(){
+  clock() {
     this.setState({
       hours: new Date()
     });
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <h2>
         São {this.state.hours.toLocaleTimeString()}, horário local.
       </h2>

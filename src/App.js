@@ -37,13 +37,21 @@ class App extends React.Component {
     ]
   }
 
+  adicionaCurso = curso => {
+
+    this.setState({
+      cursos: [...this.state.cursos, curso]
+    });
+  }
+
+  /* ↑ O spread operator (...) pega todas as informações do state (cursos) atual e substitui pelas informações novas, passadas no segundo parâmetro */
+
   removeCurso = index => {
 
     const { cursos } = this.state;
 
     this.setState({
       cursos: cursos.filter((curso, posAtual) => {
-        console.log(curso, posAtual, index)
         return posAtual !== index;
       })
     });
@@ -57,7 +65,7 @@ class App extends React.Component {
         <Greeting />
         <Clock />
         <Table cursos={this.state.cursos} removeCurso={this.removeCurso} />
-        <Form />
+        <Form adicionaCurso={this.adicionaCurso} />
       </>
     );
   }

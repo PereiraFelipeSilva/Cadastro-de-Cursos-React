@@ -22,12 +22,20 @@ class Form extends React.Component {
     });
   }
 
+  handleSubmit = event => {
+
+    event.preventDefault();
+    this.props.adicionaCurso(this.state);
+    this.setState(this.stateInicial);
+    document.getElementById('instrutor').focus();
+  }
+
   render() {
 
     const { instrutor, curso, valor } = this.state;
 
     return (
-      <form>
+      <form onSubmit={this.handleSubmit} >
         <label htmlFor="instrutor">Instrutor</label>
         <input
           id="instrutor"
@@ -35,6 +43,7 @@ class Form extends React.Component {
           name="instrutor"
           value={instrutor}
           onChange={this.handleInputChange}
+          autoFocus
         />
         <label htmlFor="curso">Curso</label>
         <input
