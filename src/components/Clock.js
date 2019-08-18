@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 class Clock extends React.Component {
 
@@ -25,9 +25,9 @@ class Clock extends React.Component {
 
   render() {
     return (
-      <h2>
+      <Fragment>
         São {this.state.hours.toLocaleTimeString()}, horário local.
-      </h2>
+      </Fragment>
     );
   }
 }

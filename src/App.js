@@ -1,8 +1,7 @@
 import React from 'react';
 import './styles/App.css';
 import 'materialize-css/dist/css/materialize.min.css';
-import Greeting from './components/Greeting';
-import Clock from './components/Clock';
+import Header from './components/Header';
 import Table from './components/Table';
 import Form from './components/Form';
 
@@ -63,8 +62,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Greeting />
-        <Clock />
+        <Header />
         <Table cursos={this.state.cursos} removeCurso={this.removeCurso} />
         <Form adicionaCurso={this.adicionaCurso} />
       </>

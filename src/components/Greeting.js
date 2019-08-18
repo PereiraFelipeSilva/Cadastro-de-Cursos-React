@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 class Greeting extends React.Component {
 
   render() {
     return (
-      <h1>Seja bem-vindo ao sistema!</h1>
+      <Fragment>Seja bem-vindo ao sistema!</Fragment>
     );
   }
 }

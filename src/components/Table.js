@@ -23,7 +23,11 @@ const TableBody = props => {
         <td>{linha.instrutor}</td>
         <td>{linha.curso}</td>
         <td>{linha.valor}</td>
-        <td><button onClick={() => { props.removeCurso(index) }}>Remover</button></td>
+        <td>
+          <button onClick={() => { props.removeCurso(index) }} className="waves-effect waves-light blue lighten-1 btn">
+            Remover
+          </button>
+        </td>
       </tr>
     );
   });
@@ -42,7 +46,7 @@ class Table extends React.Component {
     const { cursos, removeCurso } = this.props;
 
     return (
-      <table>
+      <table className="centered">
         <TableHead />
         <TableBody cursos={cursos} removeCurso={removeCurso} />
       </table>
