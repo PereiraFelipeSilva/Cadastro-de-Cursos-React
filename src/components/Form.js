@@ -40,6 +40,8 @@ class Form extends React.Component {
           <div className="input-field col s4">
             <label htmlFor="instrutor"></label>
             <input
+              className="validate"
+              required
               placeholder="Instrutor"
               id="instrutor"
               type="text"
@@ -52,6 +54,8 @@ class Form extends React.Component {
           <div className="input-field col s4">
             <label htmlFor="curso"></label>
             <input
+              className="validate"
+              required
               placeholder="Curso"
               id="curso"
               type="text"
@@ -63,9 +67,11 @@ class Form extends React.Component {
           <div className="input-field col s4">
             <label htmlFor="valor"></label>
             <input
+              className="validate"
+              required
               placeholder="Valor"
               id="valor"
-              type="text"
+              type="number"
               name="valor"
               value={valor}
               onChange={this.handleInputChange}

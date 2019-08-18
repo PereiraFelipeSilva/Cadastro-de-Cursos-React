@@ -12,27 +12,27 @@ class App extends React.Component {
       {
         instrutor: 'Max',
         curso: 'Java',
-        valor: '200'
+        valor: 200
       },
       {
         instrutor: 'Rodrigo',
         curso: 'Design',
-        valor: '75'
+        valor: 75
       },
       {
         instrutor: 'Roberta',
         curso: 'C# e C++',
-        valor: '250'
+        valor: 250
       },
       {
         instrutor: 'Luisa',
         curso: 'Angular',
-        valor: '200'
+        valor: 200
       },
       {
         instrutor: 'Diego',
         curso: 'Node',
-        valor: '100'
+        valor: 100
       }
     ]
   }
