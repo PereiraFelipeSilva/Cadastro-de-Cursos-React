@@ -1,5 +1,6 @@
 import React from 'react';
 import FormValidator from '../Services/FormValidator';
+import PopUp from '../Services/PopUp';
 
 class Form extends React.Component {
 
@@ -61,7 +62,9 @@ class Form extends React.Component {
       const campos = [instrutor, curso, valor];
       const camposInvalidos = campos.filter(elemento => elemento.isInvalid);
 
-      camposInvalidos.forEach(console.log);
+      camposInvalidos.forEach(campo => {
+        PopUp.exibeMensagem('error', campo.message);
+      });
     }
   }
 
@@ -76,7 +79,6 @@ class Form extends React.Component {
             <label htmlFor="instrutor"></label>
             <input
               className="validate"
-
               placeholder="Instrutor"
               id="instrutor"
               type="text"
@@ -90,7 +92,6 @@ class Form extends React.Component {
             <label htmlFor="curso"></label>
             <input
               className="validate"
-
               placeholder="Curso"
               id="curso"
               type="text"
@@ -103,7 +104,6 @@ class Form extends React.Component {
             <label htmlFor="valor"></label>
             <input
               className="validate"
-
               placeholder="Valor"
               id="valor"
               type="number"
