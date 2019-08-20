@@ -1,14 +1,38 @@
 import React from 'react';
+import FormValidator from '../Services/FormValidator';
 
 class Form extends React.Component {
 
   constructor(props) {
     super(props);
 
+    this.validador = new FormValidator([
+      {
+        campo: 'instrutor',
+        metodo: 'isEmpty',
+        validoQuando: false,
+        mensagem: 'Digite o nome do instrutor'
+      },
+      {
+        campo: 'curso',
+        metodo: 'isEmpty',
+        validoQuando: false,
+        mensagem: 'Digite o nome do curso'
+      },
+      {
+        campo: 'valor',
+        metodo: 'isEmpty',
+        args: [{ min: 0, max: 9999 }],
+        validoQuando: false,
+        mensagem: 'Digite o valor do curso'
+      },
+    ]);
+
     this.stateInicial = {
       instrutor: '',
       curso: '',
-      valor: ''
+      valor: '',
+      validacao: this.validador.valido()
     }
     this.state = this.stateInicial;
   }
@@ -25,9 +49,20 @@ class Form extends React.Component {
   handleSubmit = event => {
 
     event.preventDefault();
-    this.props.adicionaCurso(this.state);
-    this.setState(this.stateInicial);
-    document.getElementById('instrutor').focus();
+
+    const validacao = this.validador.valida(this.state);
+
+    if (validacao.isValid) {
+      this.props.adicionaCurso(this.state);
+      this.setState(this.stateInicial);
+      document.getElementById('instrutor').focus();
+    } else {
+      const { instrutor, curso, valor } = validacao;
+      const campos = [instrutor, curso, valor];
+      const camposInvalidos = campos.filter(elemento => elemento.isInvalid);
+
+      camposInvalidos.forEach(console.log);
+    }
   }
 
   render() {
@@ -41,7 +76,7 @@ class Form extends React.Component {
             <label htmlFor="instrutor"></label>
             <input
               className="validate"
-              required
+
               placeholder="Instrutor"
               id="instrutor"
               type="text"
@@ -55,7 +90,7 @@ class Form extends React.Component {
             <label htmlFor="curso"></label>
             <input
               className="validate"
-              required
+
               placeholder="Curso"
               id="curso"
               type="text"
@@ -68,10 +103,12 @@ class Form extends React.Component {
             <label htmlFor="valor"></label>
             <input
               className="validate"
-              required
+
               placeholder="Valor"
               id="valor"
               type="number"
+              min="0" max="9999"
+              step=".01"
               name="valor"
               value={valor}
               onChange={this.handleInputChange}
