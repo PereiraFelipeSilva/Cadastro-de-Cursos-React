@@ -1,23 +1,23 @@
 import React from 'react';
 import Greeting from './Greeting';
 import Clock from './Clock';
-import { Link } from 'react-router-dom';
+import LinkWrapper from '../Services/LinkWrapper';
 
 const Header = () => {
 
   return (
     <header className="nav-wrapper">
       <nav className="blue lighten-1">
-        <Link to="/" className="brand-logo">
+        <LinkWrapper to="/" className="brand-logo" activeStyle={{}}>
           <Greeting />
-        </Link>
+        </LinkWrapper>
         <ul id="nav-mobile" className="right">
           <li>
             <Clock />
           </li>
-          <li> <Link to="/instrutores"> Instrutores </Link> </li>
-          <li> <Link to="/cursos"> Cursos </Link> </li>
-          <li> <Link to="/sobre"> Sobre </Link> </li>
+          <li> <LinkWrapper to="/instrutores"> Instrutores </LinkWrapper> </li>
+          <li> <LinkWrapper to="/cursos"> Cursos </LinkWrapper> </li>
+          <li> <LinkWrapper to="/sobre"> Sobre </LinkWrapper> </li>
         </ul>
       </nav>
     </header>
