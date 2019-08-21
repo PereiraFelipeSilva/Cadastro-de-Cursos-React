@@ -4,7 +4,7 @@ class Greeting extends React.Component {
 
   render() {
     return (
-      <Fragment>Seja bem-vindo ao sistema!</Fragment>
+      <Fragment>Alura Cursos</Fragment>
     );
   }
 }

@@ -66,6 +66,7 @@ class App extends React.Component {
     return (
       <>
         <Header />
+        <h5>Cursos Disponíveis</h5>
         <Table cursos={this.state.cursos} removeCurso={this.removeCurso} />
         <Form adicionaCurso={this.adicionaCurso} />
       </>
