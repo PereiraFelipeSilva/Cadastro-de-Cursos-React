@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Table from './components/Table';
 import Form from './components/Form';
 import PopUp from './Services/PopUp';
+import ApiService from './Services/ApiService';
 
 class App extends React.Component {
 
@@ -63,6 +64,7 @@ class App extends React.Component {
   /* ↑ "index" é a posição da tr clicada no array original, "curso" é cada item do array original do state, e "posAtual" é a posição de cada item no array original do state. O método filter retorna, no final, um novo array apenas com os elementos cuja posição inicial era diferente da posição do botão que foi clicado e, assim, o item some da tabela */
 
   render() {
+
     return (
       <>
         <Header />
