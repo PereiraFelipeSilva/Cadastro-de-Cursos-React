@@ -9,59 +9,49 @@ import ApiService from './Services/ApiService';
 
 class App extends React.Component {
 
-  state = {
-    cursos: [
-      {
-        instrutor: 'Max',
-        curso: 'Java',
-        valor: 200
-      },
-      {
-        instrutor: 'Rodrigo',
-        curso: 'Design',
-        valor: 75
-      },
-      {
-        instrutor: 'Roberta',
-        curso: 'C# e C++',
-        valor: 250
-      },
-      {
-        instrutor: 'Luisa',
-        curso: 'Angular',
-        valor: 200
-      },
-      {
-        instrutor: 'Diego',
-        curso: 'Node',
-        valor: 100
-      }
-    ]
+  constructor(props) {
+    super(props);
+    this.state = {
+      cursos: []
+    };
+  }
+
+  componentDidMount() {
+    ApiService.ListaCursos()
+      .then(res => {
+        this.setState({
+          cursos: [...this.state.cursos, ...res.data] //mantém os cursos do state original e adiciona os novos retornados pela api
+        });
+      });
   }
 
   adicionaCurso = curso => {
 
-    this.setState({
-      cursos: [...this.state.cursos, curso]
-    });
-
-    PopUp.exibeMensagem('success', "Curso adicionado com sucesso!");
+    ApiService.CriarCurso(JSON.stringify(curso))
+      .then(res => res.data)
+      .then(curso => {
+        this.setState({
+          cursos: [...this.state.cursos, curso]
+        });
+        PopUp.exibeMensagem('success', "Curso adicionado com sucesso!");
+      });
   }
 
   /* ↑ O spread operator (...) pega todas as informações do state atual (cursos) e inclui o novo curso passado como segundo parâmetro. Esse segundo parâmetro é passado no submit do formulário com as informações dos inputs */
 
-  removeCurso = index => {
+  removeCurso = id => {
 
     const { cursos } = this.state;
 
     this.setState({
-      cursos: cursos.filter((curso, posAtual) => posAtual !== index)
+      cursos: cursos.filter(curso => curso.id !== id)
     });
 
     PopUp.exibeMensagem('removido', 'Curso removido com sucesso.');
+    ApiService.DeletarCurso(id);
   }
 
-  /* ↑ "index" é a posição da tr clicada no array original, "curso" é cada item do array original do state, e "posAtual" é a posição de cada item no array original do state. O método filter retorna, no final, um novo array apenas com os elementos cuja posição inicial era diferente da posição do botão que foi clicado e, assim, o item some da tabela */
+  /* ↑ "curso" é cada item do array original do state. O método filter retorna, no final, um novo array apenas com os elementos cujo id é diferenete do elemento que foi clicado e, assim, o item some da tabela */
 
   render() {
 

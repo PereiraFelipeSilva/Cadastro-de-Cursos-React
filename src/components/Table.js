@@ -16,15 +16,15 @@ const TableHead = () => {
 
 const TableBody = props => {
 
-  const linhas = props.cursos.map((linha, index) => {
+  const linhas = props.cursos.map(linha => {
 
     return (
-      <tr key={index}>
+      <tr key={linha.id}>
         <td>{linha.instrutor}</td>
         <td>{linha.curso}</td>
         <td>{linha.valor}</td>
         <td>
-          <button onClick={() => { props.removeCurso(index) }} className="waves-effect waves-light blue lighten-1 btn">
+          <button onClick={() => { props.removeCurso(linha.id) }} className="waves-effect waves-light blue lighten-1 btn">
             Remover
           </button>
         </td>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import DataTable from '../Services/DataTable';
+import ApiService from '../Services/ApiService';
 
 class Cursos extends React.Component {
 
@@ -8,35 +9,19 @@ class Cursos extends React.Component {
     super(props);
 
     this.state = {
-      cursos: [
-        {
-          instrutor: 'Max',
-          curso: 'Java',
-          valor: 200
-        },
-        {
-          instrutor: 'Rodrigo',
-          curso: 'Design',
-          valor: 75
-        },
-        {
-          instrutor: 'Roberta',
-          curso: 'C# e C++',
-          valor: 250
-        },
-        {
-          instrutor: 'Luisa',
-          curso: 'Angular',
-          valor: 200
-        },
-        {
-          instrutor: 'Diego',
-          curso: 'Node',
-          valor: 100
-        }
-      ],
+      cursos: [],
       titulo: 'Cursos'
     }
+  }
+
+  componentDidMount() {
+
+    ApiService.ListaCurso()
+      .then(res => {
+        this.setState({
+          cursos: [...this.state.cursos, ...res.data]
+        });
+      });
   }
 
   render() {
