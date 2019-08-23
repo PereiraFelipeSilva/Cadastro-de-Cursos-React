@@ -18,7 +18,6 @@ class App extends React.Component {
 
   componentDidMount() {
     ApiService.ListaCursos()
-      .then(res => ApiService.TrataErros(res))
       .then(res => {
         if (res.message === 'success')
           this.setState({ cursos: [...this.state.cursos, ...res.data] });
@@ -29,7 +28,6 @@ class App extends React.Component {
   adicionaCurso = curso => {
 
     ApiService.CriarCurso(JSON.stringify(curso))
-      .then(res => ApiService.TrataErros(res))
       .then(res => {
         if (res.message === 'success') {
           this.setState({ cursos: [...this.state.cursos, res.data] });
@@ -48,7 +46,6 @@ class App extends React.Component {
     const cursosAtualizado = cursos.filter(curso => curso.id !== id);
 
     ApiService.DeletarCurso(id)
-      .then(res => ApiService.TrataErros(res))
       .then(res => {
         if (res.message === 'deleted') {
           this.setState({ cursos: [...cursosAtualizado] });

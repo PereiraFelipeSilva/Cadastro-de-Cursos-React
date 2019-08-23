@@ -18,7 +18,6 @@ class Instrutores extends React.Component {
   componentDidMount() {
 
     ApiService.ListaInstrutor()
-      .then(res => ApiService.TrataErros(res))
       .then(res => {
         if (res.message === 'success')
           this.setState({ cursos: [...this.state.cursos, ...res.data] });

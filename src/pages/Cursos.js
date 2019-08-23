@@ -18,7 +18,6 @@ class Cursos extends React.Component {
   componentDidMount() {
 
     ApiService.ListaCurso()
-      .then(res => ApiService.TrataErros(res))
       .then(res => {
         if (res.message === 'success')
           this.setState({ cursos: [...this.state.cursos, ...res.data] });
