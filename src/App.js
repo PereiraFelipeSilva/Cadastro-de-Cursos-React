@@ -18,23 +18,25 @@ class App extends React.Component {
 
   componentDidMount() {
     ApiService.ListaCursos()
+      .then(res => ApiService.TrataErros(res))
       .then(res => {
-        this.setState({
-          cursos: [...this.state.cursos, ...res.data] //mantém os cursos do state original e adiciona os novos retornados pela api
-        });
-      });
+        if (res.message === 'success')
+          this.setState({ cursos: [...this.state.cursos, ...res.data] });
+      })
+      .catch(err => PopUp.exibeMensagem('error', 'Falha ao listar os cursos.'));
   }
 
   adicionaCurso = curso => {
 
     ApiService.CriarCurso(JSON.stringify(curso))
-      .then(res => res.data)
-      .then(curso => {
-        this.setState({
-          cursos: [...this.state.cursos, curso]
-        });
-        PopUp.exibeMensagem('success', "Curso adicionado com sucesso!");
-      });
+      .then(res => ApiService.TrataErros(res))
+      .then(res => {
+        if (res.message === 'success') {
+          this.setState({ cursos: [...this.state.cursos, res.data] });
+          PopUp.exibeMensagem('success', 'Curso adicionado com sucesso');
+        }
+      })
+      .catch(err => PopUp.exibeMensagem('error', 'Não foi possível adicionar o curso.'));
   }
 
   /* ↑ O spread operator (...) pega todas as informações do state atual (cursos) e inclui o novo curso passado como segundo parâmetro. Esse segundo parâmetro é passado no submit do formulário com as informações dos inputs */
@@ -43,12 +45,17 @@ class App extends React.Component {
 
     const { cursos } = this.state;
 
-    this.setState({
-      cursos: cursos.filter(curso => curso.id !== id)
-    });
+    const cursosAtualizado = cursos.filter(curso => curso.id !== id);
 
-    PopUp.exibeMensagem('removido', 'Curso removido com sucesso.');
-    ApiService.DeletarCurso(id);
+    ApiService.DeletarCurso(id)
+      .then(res => ApiService.TrataErros(res))
+      .then(res => {
+        if (res.message === 'deleted') {
+          this.setState({ cursos: [...cursosAtualizado] });
+          PopUp.exibeMensagem('removido', 'Curso removido com sucesso.');
+        }
+      })
+      .catch(err => PopUp.exibeMensagem('error', 'Não foi possível remover o curso selecionado.'));
   }
 
   /* ↑ "curso" é cada item do array original do state. O método filter retorna, no final, um novo array apenas com os elementos cujo id é diferenete do elemento que foi clicado e, assim, o item some da tabela */

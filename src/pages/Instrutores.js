@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import DataTable from '../Services/DataTable';
 import ApiService from '../Services/ApiService';
+import PopUp from '../Services/PopUp';
 
 class Instrutores extends React.Component {
 
@@ -17,11 +18,12 @@ class Instrutores extends React.Component {
   componentDidMount() {
 
     ApiService.ListaInstrutor()
+      .then(res => ApiService.TrataErros(res))
       .then(res => {
-        this.setState({
-          cursos: [...this.state.cursos, ...res.data]
-        });
-      });
+        if (res.message === 'success')
+          this.setState({ cursos: [...this.state.cursos, ...res.data] });
+      })
+      .catch(err => PopUp.exibeMensagem('error', 'Não foi possível listar os instrutores.'));
   }
 
   render() {
